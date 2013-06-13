@@ -4,8 +4,26 @@ import pyramid.session
 
 from views import myview
 
+
+def make_text(string):
+    return string
+
+urls = ('/', 'tutorial')
+render = web.template.render('templates/')
+
+app = web.application(urls, globals())
+
+my_form = web.form.Form(
+    web.form.Textbox('', class_='emailid', id='emailid'),
+    )
+
+class tutorial:
+    def GET(self):
+        form = my_form()
+        return render.tutorial(form, "Enter your email id here")
+
 config.add_route('myroute','/prefix/(one)/{two}')
-config.scan('mypackage')
+config.scan('emailid')
 
 #Database Call
 import MySQLdb
